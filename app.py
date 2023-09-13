@@ -49,9 +49,9 @@ def save_diary():
     profile.save(profilename)
 
     doc = {
-        'time': mytime,
         'file': filename,
         'profile': profilename,
+        'time': mytime,
         'title': title_receive,
         'content': content_receive
     }
