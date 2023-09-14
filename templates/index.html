@@ -23,6 +23,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&amp;display=swap" rel="stylesheet" />
 
     <style>
+        .image {
+            margin: 2%;
+            width: 50%;
+            height: 50%;
+        }
+
         .avatar {
             vertical-align: middle;
             width: 20%;
@@ -33,6 +39,21 @@
     </style>
 
     <script>
+
+        function sanitize(string) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                "/": '&#x2F;',
+                "?": "&grave;"
+            };
+            const reg = /[&<>"'/]/ig;
+            return string.replace(reg, (match) => (map[match]));
+        }
+
         $(document).ready(function () {
             listing();
             bsCustomFileInput.init();
@@ -55,12 +76,12 @@
                         <div class="col-4">
     <div class="card">
         <img src="${file}"
-            class="card-img-top" alt="...">
+            class="card-img-top image" alt="...">
         <img src="${profile}"
             class="card-img-top avatar" alt="...">
         <div class="card-body">
-            <h5 class="card-title">${title}</h5>
-            <p class="card-text">${content}</p>
+            <h5 class="card-title">${sanitize(title)}</h5>
+            <p class="card-text">${sanitize(content)}</p>
             <h6 class="card-subtitle mb-2 text-muted">Upload in ${time}</h6>
         </div>
     </div>
@@ -116,11 +137,11 @@
                 <div class="mb-3">
                     <p class="m-1">Masukan file untuk gambar:</p>
                     <div class="input-group mb-3 custom-file">
-                        <input type="file" class="form-control" id="image">
+                        <input type="file" class="form-control" id="image" accept="image/png, image/jpeg">
                     </div>
                     <p class="m-1">Masukan file untuk profile:</p>
                     <div class="input-group mb-3 custom-file">
-                        <input type="file" class="form-control" id="profile">
+                        <input type="file" class="form-control" id="profile" accept=".png, .jpeg, .jpg">
                     </div>
                 </div>
                 <div class="mb-3">
