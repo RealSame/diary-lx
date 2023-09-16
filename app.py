@@ -51,7 +51,7 @@ def save_diary():
     doc = {
         'file': filename,
         'profile': profilename,
-        'date': today,
+        'date': today.strftime('%Y-%m-%d'),
         'title': title_receive,
         'content': content_receive
     }
